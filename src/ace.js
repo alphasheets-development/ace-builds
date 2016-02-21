@@ -2487,15 +2487,12 @@ function DefaultHandlers(mouseHandler) {
 
             if (cmp == -1) {
                 anchor = this.$clickSelection.end;
-                editor._signal("alphasheets-selection-change-minus-1");
             } else if (cmp == 1) {
                 anchor = this.$clickSelection.start;
-                editor._signal("alphasheets-selection-change-plus-1");
             } else {
                 var orientedRange = calcRangeOrientation(this.$clickSelection, cursor);
                 cursor = orientedRange.cursor;
                 anchor = orientedRange.anchor;
-                editor._signal("alphasheets-selection-change-idk");
             }
             editor.selection.setSelectionAnchor(anchor.row, anchor.column);
         }
@@ -4891,6 +4888,7 @@ var Selection = function(session) {
 
         if (!keepDesiredColumn)
             this.$desiredColumn = null;
+        this._signal("alphasheets-selection-change");
     };
     this.moveCursorToScreen = function(row, column, keepDesiredColumn) {
         var pos = this.session.screenToDocumentPosition(row, column);
@@ -10546,7 +10544,6 @@ oop.inherits(CommandManager, MultiHashHandler);
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
         editor._signal("alphasheets-text-change");
-        editor._signal("alphasheets-selection-change");
 
         return e.returnValue === false ? false : true;
     };
