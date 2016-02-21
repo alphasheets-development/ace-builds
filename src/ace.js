@@ -2144,7 +2144,6 @@ var TextInput = function(parentNode, host) {
         host._signal("alphasheets-text-change");
     };
     var onInput = function(e) {
-        console.log("onInput", inComposition)
         if (inComposition)
             return;
         var data = text.value;
@@ -10543,6 +10542,7 @@ oop.inherits(CommandManager, MultiHashHandler);
         var e = {editor: editor, command: command, args: args};
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
+        editor._signal("alphasheets-text-change");
 
         return e.returnValue === false ? false : true;
     };
