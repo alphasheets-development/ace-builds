@@ -2144,6 +2144,7 @@ var TextInput = function(parentNode, host) {
         host._signal("alphasheets-text-change");
     };
     var onInput = function(e) {
+        console.log("onInput", inComposition)
         if (inComposition)
             return;
         var data = text.value;
