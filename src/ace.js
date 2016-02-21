@@ -2487,15 +2487,15 @@ function DefaultHandlers(mouseHandler) {
 
             if (cmp == -1) {
                 anchor = this.$clickSelection.end;
-                console.log("alphasheets-selection-change-minus-1");
+                editor._signal("alphasheets-selection-change-minus-1");
             } else if (cmp == 1) {
                 anchor = this.$clickSelection.start;
-                console.log("alphasheets-selection-change-plus-1");
+                editor._signal("alphasheets-selection-change-plus-1");
             } else {
                 var orientedRange = calcRangeOrientation(this.$clickSelection, cursor);
                 cursor = orientedRange.cursor;
                 anchor = orientedRange.anchor;
-                console.log("alphasheets-selection-change-idk");
+                editor._signal("alphasheets-selection-change-idk");
             }
             editor.selection.setSelectionAnchor(anchor.row, anchor.column);
         }
