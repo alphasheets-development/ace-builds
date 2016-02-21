@@ -2493,13 +2493,13 @@ function DefaultHandlers(mouseHandler) {
                 var orientedRange = calcRangeOrientation(this.$clickSelection, cursor);
                 cursor = orientedRange.cursor;
                 anchor = orientedRange.anchor;
+                editor._signal("alphasheets-selection-change");
             }
             editor.selection.setSelectionAnchor(anchor.row, anchor.column);
         }
         editor.selection.selectToPosition(cursor);
         editor.$blockScrolling--;
         editor.renderer.scrollCursorIntoView();
-        editor._signal("alphasheets-selection-change");
     };
 
     this.extendSelectionBy = function(unitName) {
