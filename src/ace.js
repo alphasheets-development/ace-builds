@@ -2499,6 +2499,7 @@ function DefaultHandlers(mouseHandler) {
         editor.selection.selectToPosition(cursor);
         editor.$blockScrolling--;
         editor.renderer.scrollCursorIntoView();
+        editor._signal("alphasheets-selection-change");
     };
 
     this.extendSelectionBy = function(unitName) {
@@ -10543,6 +10544,7 @@ oop.inherits(CommandManager, MultiHashHandler);
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
         editor._signal("alphasheets-text-change");
+        editor._signal("alphasheets-selection-change");
 
         return e.returnValue === false ? false : true;
     };
