@@ -12641,7 +12641,7 @@ var Editor = function(renderer, session) {
             backwards: isBackwards
         };
     };
-    this.getSelectionObject = function(sel) {
+    this.setSelectionObject = function(sel) {
         this.selection.setSelectionRange(
             sel.range, sel.backwards
         );
