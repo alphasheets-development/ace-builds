@@ -4493,10 +4493,14 @@ var Selection = function(session) {
     this.setSelectionRange = function(range, reverse) {
         if (reverse) {
             this.setSelectionAnchor(range.end.row, range.end.column);
-            this.selectTo(range.start.row, range.start.column);
+            this.$moveSelection(function() {
+                this.silentlyMoveCursorTo(range.start.row, range.start.column);
+            });
         } else {
             this.setSelectionAnchor(range.start.row, range.start.column);
-            this.selectTo(range.end.row, range.end.column);
+            this.$moveSelection(function() {
+                this.silentlyMoveCursorTo(range.end.row, range.end.column);
+            });
         }
         if (this.getRange().isEmpty())
             this.$isEmpty = true;
@@ -4892,6 +4896,20 @@ var Selection = function(session) {
             this.$desiredColumn = null;
         if (shouldEmit)
             this._signal("alphasheets-selection-change");
+    };
+    this.silentlyMoveCursorTo = function(row, column, keepDesiredColumn) {
+        var fold = this.session.getFoldAt(row, column, 1);
+        if (fold) {
+            row = fold.start.row;
+            column = fold.start.column;
+        }
+
+        this.$keepDesiredColumnOnChange = true;
+        this.lead.setPosition(row, column);
+        this.$keepDesiredColumnOnChange = false;
+
+        if (!keepDesiredColumn)
+            this.$desiredColumn = null;
     };
     this.moveCursorToScreen = function(row, column, keepDesiredColumn) {
         var pos = this.session.screenToDocumentPosition(row, column);
