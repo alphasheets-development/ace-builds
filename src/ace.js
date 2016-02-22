@@ -4883,7 +4883,7 @@ var Selection = function(session) {
             column = fold.start.column;
         }
 
-        shouldEmit = (row !== this.lead.row || col !== this.lead.column);
+        shouldEmit = (row !== this.lead.row || column !== this.lead.column);
         this.$keepDesiredColumnOnChange = true;
         this.lead.setPosition(row, column);
         this.$keepDesiredColumnOnChange = false;
