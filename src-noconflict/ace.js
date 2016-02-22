@@ -4876,19 +4876,22 @@ var Selection = function(session) {
         this.moveCursorTo(position.row, position.column);
     };
     this.moveCursorTo = function(row, column, keepDesiredColumn) {
+        var shouldEmit = false;
         var fold = this.session.getFoldAt(row, column, 1);
         if (fold) {
             row = fold.start.row;
             column = fold.start.column;
         }
 
+        shouldEmit = (row !== this.lead.row || col !== this.lead.column);
         this.$keepDesiredColumnOnChange = true;
         this.lead.setPosition(row, column);
         this.$keepDesiredColumnOnChange = false;
 
         if (!keepDesiredColumn)
             this.$desiredColumn = null;
-        this._signal("alphasheets-selection-change");
+        if (shouldEmit)
+            this._signal("alphasheets-selection-change");
     };
     this.moveCursorToScreen = function(row, column, keepDesiredColumn) {
         var pos = this.session.screenToDocumentPosition(row, column);
