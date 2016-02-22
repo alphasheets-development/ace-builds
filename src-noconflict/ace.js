@@ -12633,6 +12633,19 @@ var Editor = function(renderer, session) {
     this.getSelectionRange = function() {
         return this.selection.getRange();
     };
+    this.getSelectionObject = function() {
+        var sel = this.selection.getRange();
+        var isBackwards = this.selection.isBackwards();
+        return {
+            range: {start: sel.start, end: sel.end},
+            backwards: isBackwards
+        };
+    };
+    this.getSelectionObject = function(sel) {
+        this.selection.setSelectionRange(
+            sel.range, sel.backwards
+        );
+    };
     this.selectAll = function() {
         this.$blockScrolling += 1;
         this.selection.selectAll();
