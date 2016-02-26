@@ -6160,6 +6160,8 @@ var Anchor = exports.Anchor = function(doc, row, column) {
             
         var point = $getTransformedPoint(delta, {row: this.row, column: this.column}, this.$insertRight);
         this.setPosition(point.row, point.column, true);
+
+        console.error("col:", point.column, "row:", point.row);
         this._signal("alphasheets-selection-change");
     };
     
