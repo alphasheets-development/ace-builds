@@ -902,7 +902,9 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         this.setPosition(point.row, point.column, true);
 
         console.error("col:", point.column, "row:", point.row);
-        this._signal("alphasheets-selection-change");
+        if (! this.document.$silently) {
+            this._signal("alphasheets-selection-change");
+        }
     };
     
     function $pointsInOrder(point1, point2, equalPointsInOrder) {
@@ -1020,6 +1022,12 @@ var Document = function(textOrLines) {
         var len = this.getLength() - 1;
         this.remove(new Range(0, 0, len, this.getLine(len).length));
         this.insert({row: 0, column: 0}, text);
+    };
+
+    this.setValueSilently = function(text) {
+        this.$silently = true;
+        this.setValue(text);
+        this.$silently = false;
     };
     this.getValue = function() {
         return this.getAllLines().join(this.getNewLineCharacter());
