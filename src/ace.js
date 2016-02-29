@@ -12097,9 +12097,12 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
-        console.error('on command key!', e);
+        var executeHandler = true;
+        e.preventDefault = function() { executeHandler = false; };
+        e.stopPropagation = function() { };
         this._signal('alphasheets-keydown', e);
-        this.keyBinding.onCommandKey(e, hashId, keyCode);
+        if (executeHandler)
+            this.keyBinding.onCommandKey(e, hashId, keyCode);
     };
     this.setOverwrite = function(overwrite) {
         this.session.setOverwrite(overwrite);
