@@ -2112,7 +2112,6 @@ var TextInput = function(parentNode, host) {
     var afterContextMenu = false;
     
     var sendText = function(data) {
-        console.error('sendText with data:', data);
         if (inputHandler) {
             data = inputHandler(data);
             inputHandler = null;
@@ -4088,7 +4087,6 @@ var KeyBinding = function(editor) {
     };
 
     this.$callKeyboardHandlers = function(hashId, keyString, keyCode, e) {
-        console.error('keybinding with data:', data);
         var toExecute;
         var success = false;
         var commands = this.$editor.commands;
@@ -12099,6 +12097,8 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
+        console.error('on command key!', e);
+        this._signal('alphasheets-keydown', e);
         this.keyBinding.onCommandKey(e, hashId, keyCode);
     };
     this.setOverwrite = function(overwrite) {
