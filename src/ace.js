@@ -1663,7 +1663,6 @@ exports.addCommandKeyListener = function(el, callback) {
         var lastDefaultPrevented = null;
 
         addListener(el, "keydown", function(e) {
-            console.error('weird onkeydown listener!');
             var keyCode = e.keyCode;
             pressedKeys[keyCode] = (pressedKeys[keyCode] || 0) + 1;
             if (keyCode == 91 || keyCode == 92) {
@@ -2313,8 +2312,10 @@ var TextInput = function(parentNode, host) {
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
-            host._signal('alphasheets-keydown', e);
             syncComposition.schedule();
+        });
+        event.addListener(text, "keydown", function(e){
+            console.error('FUCK!!!');
         });
     }
     event.addListener(text, "compositionend", onCompositionEnd);
