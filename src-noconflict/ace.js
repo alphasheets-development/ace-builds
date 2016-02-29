@@ -2312,7 +2312,7 @@ var TextInput = function(parentNode, host) {
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
-            console.error('shit happened!', e);
+            host._signal('alphasheets-keydown', e);
             syncComposition.schedule();
         });
     }
@@ -10556,37 +10556,28 @@ oop.inherits(CommandManager, MultiHashHandler);
     oop.implement(this, EventEmitter);
 
     this.exec = function(command, editor, args) {
-        var shouldExecute = true;
-        editor._signal("alphasheets-keydown", {
-            preventDefault: function() { },
-            stopPropagation: function() { shouldExecute = false; }
-        });
-
-        if (shouldExecute) {
-
-            if (Array.isArray(command)) {
-                for (var i = command.length; i--; ) {
-                    if (this.exec(command[i], editor, args)) return true;
-                }
-                return false;
+        if (Array.isArray(command)) {
+            for (var i = command.length; i--; ) {
+                if (this.exec(command[i], editor, args)) return true;
             }
-            
-            if (typeof command === "string")
-                command = this.commands[command];
-
-            if (!command)
-                return false;
-
-            if (editor && editor.$readOnly && !command.readOnly)
-                return false;
-
-            var e = {editor: editor, command: command, args: args};
-            e.returnValue = this._emit("exec", e);
-            this._signal("afterExec", e);
-            editor._signal("alphasheets-text-change");
-
-            return e.returnValue === false ? false : true;
+            return false;
         }
+        
+        if (typeof command === "string")
+            command = this.commands[command];
+
+        if (!command)
+            return false;
+
+        if (editor && editor.$readOnly && !command.readOnly)
+            return false;
+
+        var e = {editor: editor, command: command, args: args};
+        e.returnValue = this._emit("exec", e);
+        this._signal("afterExec", e);
+        editor._signal("alphasheets-text-change");
+
+        return e.returnValue === false ? false : true;
     };
 
     this.toggleRecording = function(editor) {
