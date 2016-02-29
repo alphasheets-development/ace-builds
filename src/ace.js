@@ -4088,6 +4088,7 @@ var KeyBinding = function(editor) {
     };
 
     this.$callKeyboardHandlers = function(hashId, keyString, keyCode, e) {
+        console.error('keybinding with data:', data);
         var toExecute;
         var success = false;
         var commands = this.$editor.commands;
