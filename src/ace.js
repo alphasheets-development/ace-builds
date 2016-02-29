@@ -2112,6 +2112,7 @@ var TextInput = function(parentNode, host) {
     var afterContextMenu = false;
     
     var sendText = function(data) {
+        console.error('sendText with data:', data);
         if (inputHandler) {
             data = inputHandler(data);
             inputHandler = null;
@@ -4087,7 +4088,6 @@ var KeyBinding = function(editor) {
     };
 
     this.$callKeyboardHandlers = function(hashId, keyString, keyCode, e) {
-        console.error('called keyboard handler:', keyString);
         var toExecute;
         var success = false;
         var commands = this.$editor.commands;
