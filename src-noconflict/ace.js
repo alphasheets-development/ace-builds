@@ -11653,7 +11653,9 @@ var Editor = function(renderer, session) {
         return val;
     };
     this.setValueSilently = function(val) {
+        var sel = this.getSelectionObject();
         this.session.doc.setValueSilently(val);
+        this.setSelectionObject(sel);
         return val;
     };
     this.getValue = function() {
