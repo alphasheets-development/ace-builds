@@ -2311,7 +2311,10 @@ var TextInput = function(parentNode, host) {
         event.addListener(text, "text", function(){syncComposition.schedule()});
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
-        event.addListener(text, "keydown", function(){syncComposition.schedule()});
+        event.addListener(text, "keydown", function(e){
+            console.error('shit happened!', e);
+            syncComposition.schedule();
+        });
     }
     event.addListener(text, "compositionend", onCompositionEnd);
 
@@ -11368,7 +11371,7 @@ var Editor = function(renderer, session) {
     this.renderer = renderer;
 
     this.commands = new CommandManager(useragent.isMac ? "mac" : "win", defaultCommands);
-    this.textInput  = new TextInput(renderer.getTextAreaContainer(), this);
+    this.textInput = new TextInput(renderer.getTextAreaContainer(), this);
     this.renderer.textarea = this.textInput.getElement();
     this.keyBinding = new KeyBinding(this);
     this.$mouseHandler = new MouseHandler(this);
