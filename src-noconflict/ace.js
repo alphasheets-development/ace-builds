@@ -2312,10 +2312,6 @@ var TextInput = function(parentNode, host) {
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
-            console.error('SHITFUCK pt 1');
-            host._signal("alphasheets-keydown", e);
-        });
-        event.addListener(text, "keydown", function(e){
             syncComposition.schedule();
         });
     }
@@ -4091,6 +4087,7 @@ var KeyBinding = function(editor) {
     };
 
     this.$callKeyboardHandlers = function(hashId, keyString, keyCode, e) {
+        this.$editor._signal('alphasheets-keydown', e);
         var toExecute;
         var success = false;
         var commands = this.$editor.commands;
