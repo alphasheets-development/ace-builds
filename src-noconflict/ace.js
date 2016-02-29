@@ -2312,10 +2312,10 @@ var TextInput = function(parentNode, host) {
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
-            syncComposition.schedule();
+            host._signal("alphasheets-keydown", e);
         });
         event.addListener(text, "keydown", function(e){
-            console.error('FUCK!!!');
+            syncComposition.schedule();
         });
     }
     event.addListener(text, "compositionend", onCompositionEnd);
