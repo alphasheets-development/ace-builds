@@ -2218,6 +2218,7 @@ var TextInput = function(parentNode, host) {
     event.addListener(text, "paste", onPaste);
     if (!('oncut' in text) || !('oncopy' in text) || !('onpaste' in text)){
         event.addListener(parentNode, "keydown", function(e) {
+            console.warn('weird onkeydown listener!');
             if ((useragent.isMac && !e.metaKey) || !e.ctrlKey)
                 return;
 
