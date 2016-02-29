@@ -1663,6 +1663,7 @@ exports.addCommandKeyListener = function(el, callback) {
         var lastDefaultPrevented = null;
 
         addListener(el, "keydown", function(e) {
+            console.error('weird onkeydown listener!');
             var keyCode = e.keyCode;
             pressedKeys[keyCode] = (pressedKeys[keyCode] || 0) + 1;
             if (keyCode == 91 || keyCode == 92) {
@@ -2218,7 +2219,6 @@ var TextInput = function(parentNode, host) {
     event.addListener(text, "paste", onPaste);
     if (!('oncut' in text) || !('oncopy' in text) || !('onpaste' in text)){
         event.addListener(parentNode, "keydown", function(e) {
-            console.warn('weird onkeydown listener!');
             if ((useragent.isMac && !e.metaKey) || !e.ctrlKey)
                 return;
 
