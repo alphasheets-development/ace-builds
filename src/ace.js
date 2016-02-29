@@ -4087,7 +4087,7 @@ var KeyBinding = function(editor) {
     };
 
     this.$callKeyboardHandlers = function(hashId, keyString, keyCode, e) {
-        this.$editor._signal('alphasheets-keydown', e);
+        this.$editor._signal('FUCK');
         var toExecute;
         var success = false;
         var commands = this.$editor.commands;
