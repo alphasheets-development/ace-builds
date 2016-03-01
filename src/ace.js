@@ -2142,7 +2142,7 @@ var TextInput = function(parentNode, host) {
         if (afterContextMenu)
             afterContextMenu = false;
 
-        editor._signal("alphasheets-text-change-1");
+        host._signal("alphasheets-text-change-1");
     };
     var onInput = function(e) {
         if (inComposition)
