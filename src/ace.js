@@ -2141,8 +2141,6 @@ var TextInput = function(parentNode, host) {
         }
         if (afterContextMenu)
             afterContextMenu = false;
-
-        host._signal("alphasheets-text-change-1");
     };
     var onInput = function(e) {
         if (inComposition)
@@ -4119,7 +4117,8 @@ var KeyBinding = function(editor) {
         
         if (success)
             this.$editor._signal("keyboardActivity", toExecute);
-        
+        this.$editor._signal('alphasheets-text-change', e);
+
         return success;
     };
 
@@ -10576,7 +10575,6 @@ oop.inherits(CommandManager, MultiHashHandler);
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
 
-        editor._signal("alphasheets-text-change-2");
         return e.returnValue === false ? false : true;
     };
 
@@ -12098,14 +12096,13 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
-        var executeHandler = true;
+        var executeHandler = ture;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
         this._signal('alphasheets-keydown', e);
         console.error('executeHandler:', executeHandler);
         if (executeHandler) {
             this.keyBinding.onCommandKey(e, hashId, keyCode);
-            this._signal('alphasheets-text-change', e);
         }
     };
     this.setOverwrite = function(overwrite) {
