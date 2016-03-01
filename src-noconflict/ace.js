@@ -2311,9 +2311,9 @@ var TextInput = function(parentNode, host) {
         event.addListener(text, "text", function(){syncComposition.schedule()});
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
+        var self = this;
         event.addListener(text, "keydown", function(e){
-            this.$lastKeyDown = e;
-            console.error('set lastKeyDown:', this.$lastKeyDown);
+            self.$lastKeyDown = e;
             syncComposition.schedule();
         });
     }
