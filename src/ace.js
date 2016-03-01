@@ -12100,9 +12100,10 @@ var Editor = function(renderer, session) {
         var executeHandler = true;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
-        this._signal('alphasheets-keydown', e);
-        if (executeHandler)
+        if (executeHandler) {
+            this._signal('alphasheets-keydown', e);
             this.keyBinding.onCommandKey(e, hashId, keyCode);
+        }
     };
     this.setOverwrite = function(overwrite) {
         this.session.setOverwrite(overwrite);
