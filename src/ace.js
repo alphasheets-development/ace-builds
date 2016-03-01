@@ -12101,7 +12101,7 @@ var Editor = function(renderer, session) {
         var executeHandler = true;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
-        this._signal('alphasheets-keydown', e);
+        this._signal('alphasheets-keydown', this.textInput.$lastKeyDown);
         console.error('executeHandler:', executeHandler);
         if (executeHandler) {
             this.keyBinding.onCommandKey(e, hashId, keyCode);
