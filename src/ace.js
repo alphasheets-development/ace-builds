@@ -2313,6 +2313,7 @@ var TextInput = function(parentNode, host) {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
             this.$lastKeyDown = e;
+            console.error('set lastKeyDown:', this.$lastKeyDown);
             syncComposition.schedule();
         });
     }
@@ -12101,7 +12102,7 @@ var Editor = function(renderer, session) {
         var executeHandler = true;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
-        this._signal('alphasheets-keydown', this.textInput.$lastKeyDown);
+        this._signal('alphasheets-keydown', e);
         console.error('executeHandler:', executeHandler);
         if (executeHandler) {
             this.keyBinding.onCommandKey(e, hashId, keyCode);
