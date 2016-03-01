@@ -2311,9 +2311,7 @@ var TextInput = function(parentNode, host) {
         event.addListener(text, "text", function(){syncComposition.schedule()});
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
-        var self = this;
         event.addListener(text, "keydown", function(e){
-            self.$lastKeyDown = e;
             syncComposition.schedule();
         });
     }
@@ -12102,6 +12100,7 @@ var Editor = function(renderer, session) {
         var executeHandler = true;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
+        this.textInput.$lastKeyDown = e;
         this._signal('alphasheets-keydown', e);
         console.error('executeHandler:', executeHandler);
         if (executeHandler) {
