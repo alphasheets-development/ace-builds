@@ -12096,7 +12096,7 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
-        var executeHandler = ture;
+        var executeHandler = true;
         e.preventDefault = function() { executeHandler = false; };
         e.stopPropagation = function() { };
         this._signal('alphasheets-keydown', e);
