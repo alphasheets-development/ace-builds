@@ -1945,6 +1945,7 @@ var USE_IE_MIME_TYPE =  useragent.isIE;
 var TextInput = function(parentNode, host) {
     var text = dom.createElement("textarea");
     text.className = "ace_text-input";
+    this.$lastKeyDown = null;
 
     if (useragent.isTouchPad)
         text.setAttribute("x-palm-disable-auto-cap", true);
@@ -2311,6 +2312,7 @@ var TextInput = function(parentNode, host) {
     } else {
         event.addListener(text, "keyup", function(){syncComposition.schedule()});
         event.addListener(text, "keydown", function(e){
+            this.$lastKeyDown = e;
             syncComposition.schedule();
         });
     }
@@ -4117,7 +4119,7 @@ var KeyBinding = function(editor) {
         
         if (success)
             this.$editor._signal("keyboardActivity", toExecute);
-        this.$editor._signal('alphasheets-text-change', e);
+        this.$editor._signal('alphasheets-text-change', this.$editor.textInput.$lastKeyDown);
 
         return success;
     };
