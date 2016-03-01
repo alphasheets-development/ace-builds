@@ -11796,6 +11796,9 @@ var Editor = function(renderer, session) {
         });
         this.textInput.focus();
     };
+    this.focusSync = function() {
+        this.textInput.focus();
+    }
     this.isFocused = function() {
         return this.textInput.isFocused();
     };
