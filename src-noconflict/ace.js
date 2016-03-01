@@ -2141,7 +2141,6 @@ var TextInput = function(parentNode, host) {
         }
         if (afterContextMenu)
             afterContextMenu = false;
-        host._signal("alphasheets-text-change");
     };
     var onInput = function(e) {
         if (inComposition)
@@ -10574,7 +10573,6 @@ oop.inherits(CommandManager, MultiHashHandler);
         var e = {editor: editor, command: command, args: args};
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
-        editor._signal("alphasheets-text-change");
 
         return e.returnValue === false ? false : true;
     };
@@ -12104,6 +12102,7 @@ var Editor = function(renderer, session) {
         console.error('executeHandler:', executeHandler);
         if (executeHandler) {
             this.keyBinding.onCommandKey(e, hashId, keyCode);
+            this._signal('alphasheets-text-change', e);
         }
     };
     this.setOverwrite = function(overwrite) {
