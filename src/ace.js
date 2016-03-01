@@ -2141,6 +2141,8 @@ var TextInput = function(parentNode, host) {
         }
         if (afterContextMenu)
             afterContextMenu = false;
+
+        editor._signal("alphasheets-text-change-1");
     };
     var onInput = function(e) {
         if (inComposition)
@@ -10574,6 +10576,7 @@ oop.inherits(CommandManager, MultiHashHandler);
         e.returnValue = this._emit("exec", e);
         this._signal("afterExec", e);
 
+        editor._signal("alphasheets-text-change-2");
         return e.returnValue === false ? false : true;
     };
 
