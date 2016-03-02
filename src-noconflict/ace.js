@@ -2310,7 +2310,10 @@ var TextInput = function(parentNode, host) {
     if (useragent.isGecko) {
         event.addListener(text, "text", function(){syncComposition.schedule()});
     } else {
-        event.addListener(text, "keyup", function(){syncComposition.schedule()});
+        event.addListener(text, "keyup", function(e){
+            host._emit("keyup", e);
+            syncComposition.schedule()
+        });
         event.addListener(text, "keydown", function(e){
             syncComposition.schedule();
         });
