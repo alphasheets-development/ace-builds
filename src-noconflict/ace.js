@@ -12103,8 +12103,6 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
-        e.preventDefault = function() { };
-        e.stopPropagation = function() { };
         this.textInput.$lastKeyDown = e;
         this._signal('alphasheets-keydown', e);
         this.keyBinding.onCommandKey(e, hashId, keyCode);
