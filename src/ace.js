@@ -12103,15 +12103,11 @@ var Editor = function(renderer, session) {
     };
 
     this.onCommandKey = function(e, hashId, keyCode) {
-        var executeHandler = true;
-        e.preventDefault = function() { executeHandler = false; };
+        e.preventDefault = function() { };
         e.stopPropagation = function() { };
         this.textInput.$lastKeyDown = e;
         this._signal('alphasheets-keydown', e);
-        console.error('executeHandler:', executeHandler);
-        if (executeHandler) {
-            this.keyBinding.onCommandKey(e, hashId, keyCode);
-        }
+        this.keyBinding.onCommandKey(e, hashId, keyCode);
     };
     this.setOverwrite = function(overwrite) {
         this.session.setOverwrite(overwrite);
