@@ -12025,6 +12025,8 @@ var Editor = function(renderer, session) {
                 this.session.insert(range.start, lines[i]);
             }
         }
+
+        this._signal('alphasheets-paste');
     };
 
     this.execCommand = function(command, args) {
