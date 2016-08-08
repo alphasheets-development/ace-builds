@@ -4124,7 +4124,7 @@ var KeyBinding = function(editor) {
                 e.code == "ArrowRight"
                 || e.code == "ArrowLeft"
                 || e.code == "ArrowUp"
-                || e.code == "ArrowDown"]
+                || e.code == "ArrowDown"
                 || (e.code == "KeyA" && e.ctrlKey)
             );
         }
@@ -4132,6 +4132,7 @@ var KeyBinding = function(editor) {
         if (success) {
             this.$editor._signal("keyboardActivity", toExecute);
             var e = this.$editor.textInput.$lastKeyDown;
+            if (isTextModifier(e))
                 this.$editor._signal('alphasheets-text-change', e);
         }
         
