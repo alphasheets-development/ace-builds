@@ -409,8 +409,7 @@ exports.Search = function(editor, isReplace) {
     sb.show(editor.session.getTextRange(), isReplace);
 };
 
-});
-                (function() {
+});                (function() {
                     ace.require(["ace/ext/searchbox"], function() {});
                 })();
             

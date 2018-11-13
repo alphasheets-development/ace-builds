@@ -552,8 +552,7 @@ exports.defaultOptions = {
     showInvisibles:     "false"
 };
 
-});
-                (function() {
+});                (function() {
                     ace.require(["ace/ext/textarea"], function() {});
                 })();
             

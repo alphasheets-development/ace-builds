@@ -267,8 +267,7 @@ require("../config").defineOptions(Editor.prototype, "editor", {
     }
 });
 
-});
-                (function() {
+});                (function() {
                     ace.require(["ace/ext/elastic_tabstops_lite"], function() {});
                 })();
             

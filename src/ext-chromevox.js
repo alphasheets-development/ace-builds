@@ -533,8 +533,7 @@ require('../config').defineOptions(Editor.prototype, 'editor', {
   }
 });
 
-});
-                (function() {
+});                (function() {
                     window.require(["ace/ext/chromevox"], function() {});
                 })();
             

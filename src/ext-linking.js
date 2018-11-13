@@ -45,8 +45,7 @@ function onClick(e) {
     }
 }
 
-});
-                (function() {
+});                (function() {
                     window.require(["ace/ext/linking"], function() {});
                 })();
             

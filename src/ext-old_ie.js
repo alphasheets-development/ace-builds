@@ -494,8 +494,7 @@ patch(
 
 useragent.isOldIE = true;
 
-});
-                (function() {
+});                (function() {
                     window.require(["ace/ext/old_ie"], function() {});
                 })();
             

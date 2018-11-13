@@ -163,8 +163,7 @@ ace.define("ace/ext/keybinding_menu",["require","exports","module","ace/editor",
         }]);
     };
 
-});
-                (function() {
+});                (function() {
                     ace.require(["ace/ext/keybinding_menu"], function() {});
                 })();
             

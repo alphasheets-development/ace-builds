@@ -195,8 +195,7 @@ module.exports = {
     modesByName: modesByName
 };
 
-});
-                (function() {
+});                (function() {
                     window.require(["ace/ext/modelist"], function() {});
                 })();
             

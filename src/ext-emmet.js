@@ -1211,8 +1211,7 @@ exports.setCore = function(e) {
     else
        emmet = e;
 };
-});
-                (function() {
+});                (function() {
                     window.require(["ace/ext/emmet"], function() {});
                 })();
             

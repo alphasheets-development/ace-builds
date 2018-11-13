@@ -327,8 +327,7 @@ exports.commands = [{
     bindKey: "Ctrl-Shift-B"
 }]
 
-});
-                (function() {
+});                (function() {
                     ace.require(["ace/ext/beautify"], function() {});
                 })();
             
